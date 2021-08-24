@@ -1,5 +1,4 @@
-
-
+#coding:utf-8
 import sqlite3
 
 
@@ -7,11 +6,11 @@ def db(cur):
     cur.execute("CREATE TABLE IF NOT EXISTS utilisateurs(nom TEXT, prenom TEXT, email TEXT, mdp TEXT)" )
     print("\n Tables utilisateur créer")
 
-    utilisateur = [("Lossou", "Stephane", "stephanelossou@gmail.com", "1234"),
-                    ("Ferbeck", "Nicolas", "nicolito@bogoss.net", "1234"),
-                    ("Lossou", "Arthur", "alossou@bogoss.net", "1234")]
+    utilisateur = [("Lossou","Stephane","stephanelossou@gmail.com","1234"),
+                    ("Ferbeck","Nicolas","nicolito@bogoss.net","1234"),
+                    ("Lossou","Arthur","alossou@bogoss.net","1234")]
     cur.executemany("INSERT INTO utilisateurs VALUES (?, ?, ?, ?)", utilisateur)
-
+    
     print("\n3 users add")
 
     cur.execute("SELECT * FROM utilisateurs")
@@ -23,7 +22,7 @@ def db(cur):
 
     print("\n Table cocktail créer")
 
-    listCocktail = [("Gin Tonic","\nDescription: Bonne petite bouteille de gin venu des tropiques servie avec du bon Schweppes tonic sortie du frigo",
+    listCocktail = [("Gin Tonic","\nDescription: Bonne petite bouteille de gin venu des tropiques servie avec du bon Shweppes tonic sortie du frigo",
                     "\nRecette:\nGin --> 4 cl\nTonic --> 1 bouteille 25 cl \nGlaçon\nlamel de citron")]
     
     cur.executemany("INSERT INTO cocktails VALUES (?,?,?)", listCocktail)
@@ -79,8 +78,11 @@ def db(cur):
     for i in tmp:
         print(f"{i[0]},{i[1]}")
 
+    connection.commit()
+
       
 if __name__ == "__main__":
     connection = sqlite3.connect("database.db")
     cur = connection.cursor()
+    
     db(cur)
